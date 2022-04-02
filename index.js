@@ -59,11 +59,12 @@ const reqBodyValidator = [
       if (!Array.isArray(value)) {
         throw new Error("Address must be an array of address");
       }
+      return true
     }),
   body("skills")
     .optional()
     .trim()
-    .isString()
+    .isEmpty()
     .withMessage("Skills must be a comma separated string"),
 ];
 
