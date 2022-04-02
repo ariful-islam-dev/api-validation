@@ -79,9 +79,15 @@ const reqBodyValidator = [
 
 // handle registration
 app.post("/", reqBodyValidator, (req, res) => {
-  const errors = validationResult(req);
+
+  const errorFormatter = ({  msg, param }) => {
+    // Build your resulting errors however you want! String, object, whatever - it works!
+    return ` ${msg}`;
+  };
+
+  const errors = validationResult(req).formatWith(errorFormatter);
   if (!errors.isEmpty()) {
-    return res.status(400).json(errors.array());
+    return res.status(400).json(errors.mapped());
   }
 
   console.log('Request Body', req.body);
