@@ -20,5 +20,7 @@ Content-Type: application/json
            "city":"Munshigonj",
            "postcode": "1522"
        }
-    ]
+    ],
+    "skills":"Javascript, React, Node"
+    
 }

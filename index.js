@@ -48,6 +48,11 @@ const schema = Joi.object({
       postcode: Joi.number(),
     })
   ),
+  skills: Joi.string()
+    .trim()
+    .custom((v) => {
+      return v.split(",").map((item) => item.trim());
+    }),
 });
 
 // handle registration
