@@ -9,10 +9,14 @@
 - [x] URL Parameter
 - [x] Request Header
 
-### Validatoion Library
+### Validation Library
 
-- > express-vatidator
+- > express-validator
 - > joi
-- > ajv JSON schema vatidation
+- > ajv JSON schema validation
 - > json schema
 - > json type defination
+
+### Validation Process
+
+- [x] Custom Validation

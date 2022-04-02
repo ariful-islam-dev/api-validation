@@ -1,4 +1,4 @@
-GET http://localhost:4000/
+GET http://localhost:4000?username=ariful
 
 
 ###
@@ -6,4 +6,8 @@ GET http://localhost:4000/
 POST http://localhost:4000/
 Content-Type: application/json
 
-{}
+{
+    "name":"Abdullah Al Zarif",
+    "username":"zarif",
+    "email":"zarif@gmail.com"
+    }
