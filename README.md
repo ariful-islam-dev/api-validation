@@ -17,6 +17,13 @@
 - > json schema
 - > json type defination
 
-### Understand Schema Validation
+### Schema Validation by Joi
 
-- [ ] Just Theory
+- [ ] first look at joi
+- [ ] validation setup
+- [ ] name and email validation
+- [ ] custom validation message
+- [ ] password validation
+- [ ] nested validation
+- [ ] custom sanitizer
+- [ ] format error response

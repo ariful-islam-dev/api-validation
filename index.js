@@ -57,10 +57,14 @@ const schema = Joi.object({
 
 // handle registration
 app.post("/", (req, res) => {
-  const result = schema.validate(req.body);
+  const result = schema.validate(req.body, {abortEarly: false});
   if (result.error) {
     console.log(result.error.details);
-    return res.status(400).json(result.error.details);
+    const errors = result.error.details.reduce((acc, cur)=>{
+      acc[cur.path[0]] = cur.message
+      return acc
+    }, {})
+    return res.status(400).json(errors);
   }
   console.log(result.value);
   res.status(201).json({ message: "Ok" });
