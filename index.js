@@ -70,7 +70,11 @@ const reqBodyValidator = [
     .trim()
     .not()
     .isEmpty()
-    .withMessage("Skills must be a comma separated string"),
+    .withMessage("Skills must be a comma separated string")
+    .customSanitizer((value)=>{
+     return value.split(',').map(item => item.trim())
+    })
+    
 ];
 
 // handle registration

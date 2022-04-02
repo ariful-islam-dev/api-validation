@@ -22,7 +22,7 @@ Content-Type: application/json
             "postcode":1522
         }
     ],
-    "skills":"some, test, code"
+    "skills":"Javascript, React, Node"
     
     
 }
