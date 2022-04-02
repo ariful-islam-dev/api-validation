@@ -7,7 +7,6 @@ POST http://localhost:4000/
 Content-Type: application/json
 
 {
-    "name":"Abdullah Al Zarif",
-    "username":"zarif",
-    "email":"zarif@gmail.com"
-    }
+    "name":"Ariful Islam",
+    "email":"ariful@gmail.com"
+}

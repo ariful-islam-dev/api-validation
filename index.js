@@ -1,14 +1,22 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const { body } = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 const app = express();
 app.use([morgan("dev"), cors(), express.json()]);
 
 const reqBodyValidator = [
-  body("name"),
-  body("email"),
+  body("name")
+    .trim()
+    .isString()
+    .withMessage('Name must be a valid string')
+    .bail()
+    .isLength({ min: 5, max: 30 }).withMessage('name length must be between 5-30 chars'),
+  body("email")
+    .normalizeEmail({all_lowercase: true})
+    .isEmail()
+    .withMessage('Please provide a valid email'),
   body("password"),
   body("confirmPassword"),
   body("bio"),
@@ -18,6 +26,10 @@ const reqBodyValidator = [
 
 // handle registration
 app.post("/", reqBodyValidator, (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json(errors.array());
+  }
   res.status(201).json({ message: "Ok" });
 });
 
