@@ -1,24 +1,35 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const Joi = require('joi')
+const Joi = require("joi");
 
 const app = express();
 app.use([morgan("dev"), cors(), express.json()]);
 
-
 // Post Schema
 const schema = Joi.object({
-  name: Joi.string().required()
-})
-
+  name: Joi.string().trim().min(3).max(30).required(),
+  email: Joi.string()
+    .email({
+      minDomainSegments: 2,
+      tlds: { allow: ["com", "net", "org", "info"] },
+    })
+    .normalize()
+    .custom((value) => {
+      if (value === "test@gmail.com") {
+      throw new Error("email already in use");
+      }
+      return value;
+    })
+    .required(),
+});
 
 // handle registration
-app.post("/",  (req, res) => {
+app.post("/", (req, res) => {
   const result = schema.validate(req.body);
-  if(result.error){
+  if (result.error) {
     console.log(result.error.details);
-   return res.status(400).json(result.error.details)
+    return res.status(400).json(result.error.details);
   }
   console.log(result.value);
   res.status(201).json({ message: "Ok" });

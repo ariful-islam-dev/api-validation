@@ -6,3 +6,7 @@ GET http://localhost:4000?username=ariful
 POST http://localhost:4000/
 Content-Type: application/json
 
+{
+    "name":"Ariful Islam",
+    "email":"test@gmail.com"
+}
