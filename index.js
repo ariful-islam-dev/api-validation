@@ -16,7 +16,13 @@ const reqBodyValidator = [
   body("email")
     .normalizeEmail({all_lowercase: true})
     .isEmail()
-    .withMessage('Please provide a valid email'),
+    .withMessage('Please provide a valid email')
+    .custom((value)=>{
+      if(value === 'ariful@gmail.com'){
+        throw new Error('email already used')
+      }
+      return true
+    }),
   body("password"),
   body("confirmPassword"),
   body("bio"),
