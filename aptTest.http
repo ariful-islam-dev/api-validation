@@ -12,8 +12,17 @@ Content-Type: application/json
     "password":"Aa$11234",
     "confirmPassword":"Aa$11234",
     "bio": "Backend Focused Junior Full-stack developer",
-    "addresses": [],
-    "skills": ["Node, React, Javascript"]
+    "addresses": [
+        {
+            "city":"borisal",
+            "postcode": "8224"
+        },
+        {
+            "city":"munshigonj",
+            "postcode":1522
+        }
+    ],
+    "skills":"some, test, code"
     
     
 }

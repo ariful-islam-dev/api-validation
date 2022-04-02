@@ -59,11 +59,16 @@ const reqBodyValidator = [
       if (!Array.isArray(value)) {
         throw new Error("Address must be an array of address");
       }
-      return true
+      return true;
     }),
+  body("addresses.*.postcode")
+    .isNumeric()
+    .withMessage("Postcode must be numeric")
+    .toInt(),
   body("skills")
     .optional()
     .trim()
+    .not()
     .isEmpty()
     .withMessage("Skills must be a comma separated string"),
 ];
@@ -74,6 +79,8 @@ app.post("/", reqBodyValidator, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json(errors.array());
   }
+
+  console.log('Request Body', req.body);
   res.status(201).json({ message: "Ok" });
 });
 
