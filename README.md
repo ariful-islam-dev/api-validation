@@ -17,19 +17,6 @@
 - > json schema
 - > json type defination
 
-### Express Validation Process
+### Understand Schema Validation
 
-- [ ] Introducing express-validator
-- [ ] Setup express validator
-- [ ] Get validation result
-- [ ] Name & Email Validation
-- [ ] Custom Validator for email
-- [ ] Password Validation
-- [ ] Optional Properties
-- [ ] Fixed Addresses and skills issues
-- [ ] Wildcard validation
-- [ ] Custom sanitizer for skills
-- [ ] Schema validation
-- [ ] Format validation result
-- [ ] validation result custom middleware
-- [ ] Wrap up
+- [ ] Just Theory

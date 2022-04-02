@@ -6,23 +6,3 @@ GET http://localhost:4000?username=ariful
 POST http://localhost:4000/
 Content-Type: application/json
 
-{
-    "name":"Ariful Islam",
-    "email":"ariful1@gmail.com",
-    "password":"Aa$11234",
-    "confirmPassword":"Aa$11234",
-    "bio": "Backend Focused Junior Full-stack developer",
-    "addresses": [
-        {
-            "city":"borisal",
-            "postcode": "8224"
-        },
-        {
-            "city":"munshigonj",
-            "postcode":1522
-        }
-    ],
-    "skills":"Javascript, React, Node"
-    
-    
-}
