@@ -77,9 +77,8 @@ const reqBodyValidator = [
     
 ];
 
-// handle registration
-app.post("/", reqBodyValidator, (req, res) => {
-
+// validate middleware
+const validate = (req, res, next)=>{
   const errorFormatter = ({  msg, param }) => {
     // Build your resulting errors however you want! String, object, whatever - it works!
     return ` ${msg}`;
@@ -89,7 +88,14 @@ app.post("/", reqBodyValidator, (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json(errors.mapped());
   }
+  next()
 
+}
+
+// handle registration
+app.post("/", reqBodyValidator, validate, (req, res) => {
+
+  
   console.log('Request Body', req.body);
   res.status(201).json({ message: "Ok" });
 });
