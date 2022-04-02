@@ -8,7 +8,11 @@ app.use([morgan("dev"), cors(), express.json()]);
 
 // Post Schema
 const schema = Joi.object({
-  name: Joi.string().trim().min(3).max(30).required(),
+  name: Joi.string().trim().min(3).max(30).required().messages({
+    "string.base": "Name Must Be String",
+    "string.min": "Minimum Length 3",
+    "string.max": "Maximum Length 30",
+  }),
   email: Joi.string()
     .email({
       minDomainSegments: 2,
@@ -17,11 +21,28 @@ const schema = Joi.object({
     .normalize()
     .custom((value) => {
       if (value === "test@gmail.com") {
-      throw new Error("email already in use");
+        throw new Error("email already in use");
       }
       return value;
     })
+    .required()
+    .messages({
+      "any.custom": "Email Already is in use",
+    }),
+  password: Joi.string()
+    .min(8)
+    .max(30)
+    .pattern(
+      new RegExp(
+        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,30}/
+      )
+    )
+    .message({
+      "string.pattern.base":
+        "Password must contain uppercase, lowercase, digit and special chars",
+    })
     .required(),
+  confirmPassword: Joi.ref('password')
 });
 
 // handle registration
