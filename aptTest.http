@@ -10,5 +10,7 @@ Content-Type: application/json
     "name":"Ariful Islam",
     "email":"ariful1@gmail.com",
     "password":"Aa$11234",
-    "confirmPassword":"Aa$11234"
+    "confirmPassword":"Aa$11234",
+    "bio": "Backend Focused Junior Full-stack developer",
+    
 }

@@ -32,7 +32,7 @@ const reqBodyValidator = [
     .isLength({ min: 8, max: 30 })
     .withMessage("Password length must be between 8-30 chars")
     .bail()
-    .matches(/^[a-zA-Z0-9!@#$%^&*]{8,30}$/g)
+    .matches(/^[a-zA-Z0-9!@#$%^&*]{8,30}$/)
     .withMessage(
       "Password must contain uppercase, lowercase, digit ans special chars"
     ),
@@ -40,15 +40,31 @@ const reqBodyValidator = [
     .isString()
     .withMessage("Confirm Password must be a valid string")
     .bail()
-    .custom((value, {req})=>{
-      if(value !== req.body.password){
-        throw new Error('Password Does not Match')
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Password Does not Match");
       }
-      return true
+      return true;
     }),
-  body("bio"),
-  body("address"),
-  body("skills"),
+  body("bio")
+    .optional()
+    .trim()
+    .escape()
+    .isString()
+    .isLength({ min: 20, max: 300 })
+    .withMessage("bio must be between 20-300 chars"),
+  body("address")
+    .optional()
+    .custom((value) => {
+      if (!Array.isArray(value)) {
+        throw new Error("Address must be an array of address");
+      }
+    }),
+  body("skills")
+    .optional()
+    .trim()
+    .isString()
+    .withMessage("Skills must be a comma separated string"),
 ];
 
 // handle registration
