@@ -9,5 +9,16 @@ Content-Type: application/json
 {
     "name":"121",
     "email":"ariful@gmail.com",
-    "password":"Ariful"
+    "password":"Ariful12$3",
+    "confirmPassword":"Ariful12$3",
+    "bio": "Junior Full-stack developer",
+    "addresses":[
+       {
+           "city":"Borisal",
+           "postcode": "8224"
+       },{
+           "city":"Munshigonj",
+           "postcode": "1522"
+       }
+    ]
 }

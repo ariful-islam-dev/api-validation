@@ -33,16 +33,21 @@ const schema = Joi.object({
     .min(8)
     .max(30)
     .pattern(
-      new RegExp(
-        /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,30}/
-      )
+      new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,30}/)
     )
     .message({
       "string.pattern.base":
         "Password must contain uppercase, lowercase, digit and special chars",
     })
     .required(),
-  confirmPassword: Joi.ref('password')
+  confirmPassword: Joi.ref("password"),
+  bio: Joi.string().trim().min(20).max(300),
+  addresses: Joi.array().items(
+    Joi.object({
+      city: Joi.string(),
+      postcode: Joi.number(),
+    })
+  ),
 });
 
 // handle registration
