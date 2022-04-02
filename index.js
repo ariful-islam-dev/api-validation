@@ -10,21 +10,42 @@ const reqBodyValidator = [
   body("name")
     .trim()
     .isString()
-    .withMessage('Name must be a valid string')
+    .withMessage("Name must be a valid string")
     .bail()
-    .isLength({ min: 5, max: 30 }).withMessage('name length must be between 5-30 chars'),
+    .isLength({ min: 5, max: 30 })
+    .withMessage("name length must be between 5-30 chars"),
   body("email")
-    .normalizeEmail({all_lowercase: true})
+    .normalizeEmail({ all_lowercase: true })
     .isEmail()
-    .withMessage('Please provide a valid email')
-    .custom((value)=>{
-      if(value === 'ariful@gmail.com'){
-        throw new Error('email already used')
+    .withMessage("Please provide a valid email")
+    .bail()
+    .custom((value) => {
+      if (value === "ariful@gmail.com") {
+        throw new Error("email already used");
+      }
+      return true;
+    }),
+  body("password")
+    .isString()
+    .withMessage("Password must be a valid string")
+    .bail()
+    .isLength({ min: 8, max: 30 })
+    .withMessage("Password length must be between 8-30 chars")
+    .bail()
+    .matches(/^[a-zA-Z0-9!@#$%^&*]{8,30}$/g)
+    .withMessage(
+      "Password must contain uppercase, lowercase, digit ans special chars"
+    ),
+  body("confirmPassword")
+    .isString()
+    .withMessage("Confirm Password must be a valid string")
+    .bail()
+    .custom((value, {req})=>{
+      if(value !== req.body.password){
+        throw new Error('Password Does not Match')
       }
       return true
     }),
-  body("password"),
-  body("confirmPassword"),
   body("bio"),
   body("address"),
   body("skills"),

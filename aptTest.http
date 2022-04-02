@@ -8,5 +8,7 @@ Content-Type: application/json
 
 {
     "name":"Ariful Islam",
-    "email":"ariful@gmail.com"
+    "email":"ariful1@gmail.com",
+    "password":"Aa$11234",
+    "confirmPassword":"Aa$11234"
 }
