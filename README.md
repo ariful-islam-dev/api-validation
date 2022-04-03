@@ -21,3 +21,4 @@
 
 - [ ] json schema specification
 - [ ] create a json schema
+- [ ] validate json schema
