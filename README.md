@@ -17,13 +17,7 @@
 - > json schema
 - > json type defination
 
-### Schema Validation by Joi
+### JSON Schema
 
-- [ ] first look at joi
-- [ ] validation setup
-- [ ] name and email validation
-- [ ] custom validation message
-- [ ] password validation
-- [ ] nested validation
-- [ ] custom sanitizer
-- [ ] format error response
+- [ ] json schema specification
+- [ ] create a json schema
