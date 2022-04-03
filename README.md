@@ -15,11 +15,9 @@
 - > joi
 - > ajv JSON schema validation
 - > json schema
-- > json type defination
+- > json type definition
 
-### JSON Schema
+### JSON Type Definition
 
-- [ ] json schema specification
-- [ ] create a json schema
-- [ ] validate json schema
-- [ ] online converters
+- [ ] json type def introduction
+- [ ]
