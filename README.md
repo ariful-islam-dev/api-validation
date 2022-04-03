@@ -17,7 +17,7 @@
 - > json schema
 - > json type definition
 
-### JSON Type Definition
+### JSON Type Definition (only theory)
 
 - [ ] json type def introduction
-- [ ]
+- [ ] json type def specification
