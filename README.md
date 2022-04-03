@@ -20,4 +20,4 @@
 ### JSON Type Definition (only theory)
 
 - [ ] json type def introduction
-- [ ] json type def specification
+- [ ] json type def specification (ajv and ajv-formats)

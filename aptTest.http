@@ -7,7 +7,7 @@ POST http://localhost:4000/
 Content-Type: application/json
 
 {
-    "name":"121",
+    "name":"Ariful Islam",
     "email":"ariful@gmail.com",
     "password":"Ariful12$3",
     "confirmPassword":"Ariful12$3",
@@ -15,10 +15,10 @@ Content-Type: application/json
     "addresses":[
        {
            "city":"Borisal",
-           "postcode": "8224"
+           "postcode": 8224
        },{
            "city":"Munshigonj",
-           "postcode": "1522"
+           "postcode": 1522
        }
     ],
     "skills":"Javascript, React, Node"

@@ -1,72 +1,23 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const Joi = require("joi");
+const Ajv = require("ajv");
+const addFormats = require("ajv-formats");
+
+const ajv = new Ajv({ allErrors: true });
+addFormats(ajv);
 
 const app = express();
 app.use([morgan("dev"), cors(), express.json()]);
 
-// Post Schema
-const schema = Joi.object({
-  name: Joi.string().trim().min(3).max(30).required().messages({
-    "string.base": "Name Must Be String",
-    "string.min": "Minimum Length 3",
-    "string.max": "Maximum Length 30",
-  }),
-  email: Joi.string()
-    .email({
-      minDomainSegments: 2,
-      tlds: { allow: ["com", "net", "org", "info"] },
-    })
-    .normalize()
-    .custom((value) => {
-      if (value === "test@gmail.com") {
-        throw new Error("email already in use");
-      }
-      return value;
-    })
-    .required()
-    .messages({
-      "any.custom": "Email Already is in use",
-    }),
-  password: Joi.string()
-    .min(8)
-    .max(30)
-    .pattern(
-      new RegExp(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,30}/)
-    )
-    .message({
-      "string.pattern.base":
-        "Password must contain uppercase, lowercase, digit and special chars",
-    })
-    .required(),
-  confirmPassword: Joi.ref("password"),
-  bio: Joi.string().trim().min(20).max(300),
-  addresses: Joi.array().items(
-    Joi.object({
-      city: Joi.string(),
-      postcode: Joi.number(),
-    })
-  ),
-  skills: Joi.string()
-    .trim()
-    .custom((v) => {
-      return v.split(",").map((item) => item.trim());
-    }),
-});
-
 // handle registration
 app.post("/", (req, res) => {
-  const result = schema.validate(req.body, {abortEarly: false});
-  if (result.error) {
-    console.log(result.error.details);
-    const errors = result.error.details.reduce((acc, cur)=>{
-      acc[cur.path[0]] = cur.message
-      return acc
-    }, {})
-    return res.status(400).json(errors);
+  const validate = ajv.compile(require("./registration.schema.json"));
+  const valid = validate(req.body);
+  if (!valid) {
+    console.log(validate.errors);
+    return res.status(400).json(validate.errors);
   }
-  console.log(result.value);
   res.status(201).json({ message: "Ok" });
 });
 
